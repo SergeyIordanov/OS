@@ -1,0 +1,5 @@
+﻿  stdafx.cpp
+  Lab1.cpp
+c:\users\serge\documents\visual studio 2015\projects\lab1\lab1\lab1.cpp(9): error C3861: 'checkEncoding': identifier not found
+c:\users\serge\documents\visual studio 2015\projects\lab1\lab1\lab1.cpp(15): warning C4477: 'printf' : format string '%d' requires an argument of type 'int', but variadic argument 1 has type 'size_t'
+  c:\users\serge\documents\visual studio 2015\projects\lab1\lab1\lab1.cpp(15): note: consider using '%zd' in the format string

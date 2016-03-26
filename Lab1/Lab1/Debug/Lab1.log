@@ -1,0 +1,4 @@
+﻿  stdafx.cpp
+  Lab1.cpp
+c:\users\serge\documents\visual studio 2015\projects\lab1\lab1\lab1.cpp(145): error C2065: 'num2': undeclared identifier
+c:\users\serge\documents\visual studio 2015\projects\lab1\lab1\lab1.cpp(150): error C2065: 'num2': undeclared identifier
