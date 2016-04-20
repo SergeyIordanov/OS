@@ -21,3 +21,5 @@
 #define CreateFileForWrite(fname) CreateFile(fname, GW, FSR, 0, CN, 0, 0)
 
 #define CreateFileForReadWrite(fname) CreateFile(fname, GR|GW, FSR, 0, OA, 0, 0)
+
+#define OpenFileForWrite(fname) CreateFile(fname, GW, FSR, 0, OE, 0, 0)
