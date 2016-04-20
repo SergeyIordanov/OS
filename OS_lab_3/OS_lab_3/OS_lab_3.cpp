@@ -28,7 +28,7 @@ int main()
 		printf("Success! Size: %d/%d\n\n", (mb->getMaxSize() - freeSize), mb->getMaxSize());
 
 		//Add letters
-		char* m1 = "THE FIRST LETTER";
+		/*char* m1 = "THE FIRST LETTER";
 		BYTE* b1 = (BYTE*)m1;
 		printf("Adding letter #%d: %s\n",mb->getMessageCount() + 1, m1);
 		mb->AddLetter(b1, strlen(m1));
@@ -56,10 +56,10 @@ int main()
 		b1 = (BYTE*)m1;
 		printf("Adding letter #%d: %s\n", mb->getMessageCount() + 1, m1);
 		mb->AddLetter(b1, strlen(m1));
-		printf("Success!\n\n");
+		printf("Success!\n\n");*/
 
 		//ReadLetter
-		BYTE* b2 = NULL;
+		/*BYTE* b2 = NULL;
 		DWORD messageSize;	
 		DWORD idRead = 3;
 		printf("Reading letter: #%d\n", idRead);
@@ -70,7 +70,7 @@ int main()
 			printf("%c", m2[i]);
 		printf("\nSize: %d\n", messageSize);
 		printf("Success!\n\n");
-		free(b2);
+		free(b2);*/
 
 		//Delete letter
 		/*DWORD idDel = 3;

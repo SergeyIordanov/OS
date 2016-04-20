@@ -24,4 +24,8 @@ public:
 	DWORD getMaxSize() { return maxSize; }
 	DWORD getMailboxesCount() { return mailBoxesCount; }
 	DWORD getDwCount() { return dwCount; }
+private:
+	BOOL setCRC16(TCHAR* fname);
+	BOOL checkCRC16(TCHAR* fname);
+	UINT16 calcCRC16(UINT8 *buf, DWORD sizeOfData);
 };
