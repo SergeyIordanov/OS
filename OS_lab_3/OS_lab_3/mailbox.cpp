@@ -46,12 +46,12 @@ DWORD MailBox::mailBoxesCount = 0;
 MailBox::MailBox(TCHAR * fname, DWORD maxSize)
 {
 	BOOL b = false;
-	if (maxSize == 0) {
-		b = this->checkCRC16(fname);
-		if (!b) throw Errors(_T("File is broken"));
+	if (maxSize == 0) {		
 		HANDLE h = CreateFileForRead(fname);
 		b = h != IHV;
 		if (!b) throw Errors(_T("File doesn't exist"));	
+		b = this->checkCRC16(fname);
+		if (!b) throw Errors(_T("File is broken"));
 		SetFilePointer(h, 2, 0, FILE_BEGIN);
 		b = ReadFile(h, &this->lettersCount, sizeof(this->lettersCount), &this->dwCount, 0);
 		if (!b) throw Errors(_T("Cannot read file"));
@@ -146,7 +146,7 @@ DWORD MailBox::DeleteLetter(DWORD idLetter)
 	if (h == IHV) throw Errors(_T("File doesn't exist"));
 	DWORD fileSize = GetFileSize(h, 0);
 
-	SetFilePointer(h, 2 + sizeof(this->lettersCount) + sizeof(this->maxSize), 0, FILE_BEGIN);
+	prevLetterPointerPos = SetFilePointer(h, 2 + sizeof(this->lettersCount) + sizeof(this->maxSize), 0, FILE_BEGIN);
 	for (unsigned i = 1; i < idLetter; i++)
 	{
 		b = ReadFile(h, &messageSize, sizeof(messageSize), &this->dwCount, 0);
@@ -156,6 +156,11 @@ DWORD MailBox::DeleteLetter(DWORD idLetter)
 	b = ReadFile(h, &messageSize, sizeof(messageSize), &this->dwCount, 0);
 	if (!b) throw Errors(_T("Cannot read message size"));
 	nextLetterPointerPos = SetFilePointer(h, messageSize, 0, FILE_CURRENT);
+
+	SetFilePointer(h, 2, 0, FILE_BEGIN);
+	this->lettersCount = this->lettersCount - 1;
+	b = WriteFile(h, &this->lettersCount, 2, &this->dwCount, 0);
+	if (!b) throw Errors(_T("Cannot write number of letters"));
 
 	SetFilePointer(h, 0, 0, FILE_BEGIN);
 	BYTE* buf = (BYTE*)calloc(fileSize - (nextLetterPointerPos - prevLetterPointerPos), sizeof(BYTE));
