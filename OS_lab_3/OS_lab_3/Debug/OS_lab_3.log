@@ -1,2 +1,3 @@
-﻿  OS_lab_3.cpp
+﻿  mailbox.cpp
+c:\1sergey\4projectsingit\university\os\os_lab_3\os_lab_3\mailbox.cpp(283): warning C4018: '<': signed/unsigned mismatch
   OS_lab_3.vcxproj -> C:\1Sergey\4ProjectsInGit\University\OS\OS_lab_3\Debug\OS_lab_3.exe

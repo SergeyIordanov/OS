@@ -24,7 +24,7 @@ int main()
 			BOOL exit = false;
 			try
 			{
-				printf("\nPress 1 to create new mailbox or 2 to open existed\n");
+				printf("\n1 Create new mailbox \n2 Open existed\n");
 				char ch1;
 				cin >> ch1;
 				if (ch1 == '1')
@@ -86,7 +86,7 @@ int main()
 				while (true)
 				{
 					try {
-						printf("\nPress 1 to add letter, 2 to read letter or 3 to delete letter (q - exit, r - restart)\n");
+						printf("\n1 Add letter\n2 Read letter\n3 Delete letter\n4 Read all messages (using file mapping)\nq - exit\nr - restart\n");
 						char ch3;
 						cin >> ch3;
 						if (ch3 == '1')
@@ -124,6 +124,10 @@ int main()
 							printf("Deleting letter: #%d\n", idDel);
 							mb->DeleteLetter(idDel);
 							printf("Success!\n\n");
+						}
+						else if (ch3 == '4')
+						{
+							mb->ReadUsingFileMapping();
 						}
 						else if (ch3 == 'r')
 						{

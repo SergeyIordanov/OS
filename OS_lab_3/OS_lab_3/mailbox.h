@@ -19,6 +19,7 @@ public:
 	BOOL AddLetter(BYTE* message, DWORD size);
 	BOOL ReadLetter(DWORD idLetter, BYTE* &message, DWORD &size);
 	DWORD DeleteLetter(DWORD idLetter);
+	void ReadUsingFileMapping();
 	DWORD getMessageCount() { return lettersCount; }
 	TCHAR* getFileName() { return fileName; }
 	DWORD getMaxSize() { return maxSize; }

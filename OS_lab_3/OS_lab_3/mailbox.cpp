@@ -249,3 +249,45 @@ UINT16 MailBox::calcCRC16(UINT8 *buf, DWORD sizeOfData)
 	return(crc16);
 }
 
+
+void MailBox::ReadUsingFileMapping() {
+	HANDLE h = CreateFileForReadWrite(this->fileName);
+	if (h == IHV) throw Errors(_T("File doesn't exist"));
+	DWORD fileSize = GetFileSize(h, 0);
+	HANDLE hFileMapping; // объект ядра "проекция файла"
+	hFileMapping = CreateFileMapping(h, 0, PAGE_READWRITE, 0, fileSize, (LPCWSTR)"map1");
+	CloseHandle(h);
+	if (hFileMapping == 0){
+		printf("Cannot create file mapping");
+		return;
+	}
+	//PBYTE pbFile; // массив байт всего файла
+	BYTE* pbFile;
+	// Проецируем в адресное пространство процесса объект "проекция файла"
+	pbFile = (BYTE*)MapViewOfFile(hFileMapping, FILE_MAP_ALL_ACCESS, 0, 0, 0);
+	CloseHandle(hFileMapping);
+	if (pbFile == 0) {
+		printf("Cannot map file to the memory");
+		return;
+	}
+
+	//printf("%d", );
+	printf("\n");
+	char* m2 = (char*)pbFile;
+	int letterSize = 0;
+	int count = 1;
+	for (unsigned i = 10; i < fileSize; count++) {
+		letterSize = (int)m2[i];
+		int stop = letterSize + i + 4;
+		printf("Letter %d: ", count);
+		for (i += 4; i < stop; i++) {
+			printf("%c", (int)m2[i]);
+		}
+		printf("\n");
+	}
+	if (!UnmapViewOfFile(pbFile)) {
+		printf("Cannot unmap memory!\nRestart the program");
+		return;
+	}
+	printf("\n");
+}
