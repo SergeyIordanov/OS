@@ -14,6 +14,8 @@ struct memPage {
 	DWORD state;
 };
 
+list<PAGE> pageList;
+
 vector<memPage> freeMem;
 vector<memPage> buzyMem;
 
@@ -185,8 +187,8 @@ void theLeastSufficientDelete(LPVOID del)
 		printf("\nCannot make free memory by address %x\n\n", (unsigned)del);
 	}
 }
-list<PAGE> pageList;
 
+//------Third task------
 void addPage(PVOID *pA, SIZE_T count, pPage p) {
 	BOOL found = false;
 	PAGE temp;
@@ -223,42 +225,4 @@ void printPageList() {
 		printf("Virt = %x Phys = %x\n", (unsigned)i->virt, (unsigned)i->phys);
 	}
 	printf("\n");
-}
-
-//------Third task------
-vector<SIZE_T> limitedVector;
-void printLimitedVector()
-{
-	for (unsigned i = 0; i < limitedVector.size(); i++) {
-		_tprintf(_T("%d. %d\n"), i, limitedVector[i]);
-	}
-	_tprintf(_T("\n"));
-}
-
-void addToPages(SIZE_T elem)
-{
-	_tprintf(_T("Elem: %d\n"), elem);
-	SIZE_T maxLen = 5;
-
-	for (unsigned i = 0; i < limitedVector.size(); i++)
-	{
-		if (limitedVector[i] == elem)
-		{
-			limitedVector.push_back(limitedVector[i]);
-			limitedVector.erase(limitedVector.begin() + i);
-			printLimitedVector();
-			return;
-		}
-	}
-
-	if (limitedVector.size() == maxLen)
-	{
-		limitedVector.erase(limitedVector.begin());
-		limitedVector.push_back(elem);
-	}
-	else
-	{
-		limitedVector.push_back(elem);
-	}
-	printLimitedVector();
 }
